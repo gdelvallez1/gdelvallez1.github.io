@@ -1,0 +1,150 @@
+/* style.css
+ * This file provides css styles.
+ */
+
+body,html {
+	background-color: #3b4b54; width : 100%;
+	height: 100%;
+	margin: 0 auto;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	color: #ffffff;
+}
+
+
+div.header {
+	flex: 100%;
+}
+
+div.grid {
+	float: left;
+}
+
+div.status {
+	margin: 10px;
+}
+
+div.solutions {
+	margin: 10px;
+}
+a {
+	text-decoration: none;
+	color: #00aed1;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+table {
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+
+th,td {
+	padding: 0;
+	border-collapse: collapse;
+}
+table.grid {
+	margin: 0 40px 0 20px;
+	word-wrap: break-word;
+	color: black;
+}
+
+td.cell {
+	width: 30px;
+	text-align: center;
+}
+
+td.quartier1 {
+	border-top:    2px solid black;
+	border-left:   2px solid black;
+	border-bottom: 1px solid black;
+	border-right:  1px solid black;
+}
+td.quartier2 {
+	border-top:    2px solid black;
+	border-left:   1px solid black;
+	border-bottom: 1px solid black;
+	border-right:  1px solid black;
+}
+td.quartier3 {
+	border-top:    2px solid black;
+	border-left:   1px solid black;
+	border-bottom: 1px solid black;
+	border-right:  2px solid black;
+}
+td.quartier4 {
+	border-top:    1px solid black;
+	border-left:   2px solid black;
+	border-bottom: 1px solid black;
+	border-right:  1px solid black;
+}
+td.quartier5 {
+	border-top:    1px solid black;
+	border-left:   1px solid black;
+	border-bottom: 1px solid black;
+	border-right:  1px solid black;
+}
+td.quartier6 {
+	border-top:    1px solid black;
+	border-left:   1px solid black;
+	border-bottom: 1px solid black;
+	border-right:  2px solid black;
+}
+td.quartier7 {
+	border-top:    1px solid black;
+	border-left:   2px solid black;
+	border-bottom: 2px solid black;
+	border-right:  1px solid black;
+}
+td.quartier8 {
+	border-top:    1px solid black;
+	border-left:   1px solid black;
+	border-bottom: 2px solid black;
+	border-right:  1px solid black;
+}
+td.quartier9 {
+	border-top:    1px solid black;
+	border-left:   1px solid black;
+	border-bottom: 2px solid black;
+	border-right:  2px solid black;
+}
+
+ul {
+	margin: 0px;
+}
+
+.status {
+    color: red;
+}
+
+.error {
+    color: salmon;
+}
+
+.warning {
+    color: lightgreen;
+}
+
+span.value {
+	font-size: x-large;
+}
+
+table.hypo {
+	width: 100%;	
+}
+
+td.hypo {
+	font-size: small;
+}
+
+.hide {
+	display: none !important;
+}
+
+.show {
+}
+
+:disabled {
+  background: #dddddd;
+}
