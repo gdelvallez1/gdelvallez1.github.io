@@ -48,7 +48,6 @@ table.grid {
 	margin: 0 40px 0 20px;
 	word-wrap: break-word;
 	color: black;
-	transform: scaleY(0.7);
 }
 
 td.cell {
@@ -132,11 +131,12 @@ span.value {
 }
 
 table.hypo {
-	width: 100%;	
+	width: 48px;	
 }
 
 td.hypo {
 	font-size: small;
+	text-align: center;
 }
 
 .hide {
