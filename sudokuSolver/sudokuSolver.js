@@ -156,7 +156,6 @@ function displaySolutions() {
 	if (window.Worker) {
 		// run asynchronous if possible
 		let w = new Worker("calculateSolutionsWorker.js");
-		w.postMessage(grid.toString());
 		w.onmessage = function(event) {
 			if ( event.data[0] == "SOL" )  {
 				// the event data is a solution
@@ -171,7 +170,8 @@ function displaySolutions() {
 				// display calculation completion
 				completeSolutionsDisplay(start);
 			} 
-		};	
+		};
+		w.postMessage(grid.toString());	
 	} else {
 		// if not possible, run synchronous
 		// get first cell from the grid

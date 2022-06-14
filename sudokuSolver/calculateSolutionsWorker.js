@@ -1,9 +1,9 @@
 importScripts('gridBean.js')
 importScripts('solutions.js')
 
-var cell;
-var grid = undefined;
-var solutionsList = undefined;
+var cell1;
+var grid1 = undefined;
+var solutionsList1 = undefined;
 
 function displayOneSolution(sol) {
 	postMessage(["SOL",sol]);
@@ -12,19 +12,19 @@ function displayOneSolution(sol) {
 function searchSolutions () {
 	// calculate solutions based on current grid
 	// this function also call displayOneSolution as soon as the solution is found
-	solutionsList.calculateSolutions( grid, cell, displayOneSolution );
+	solutionsList1.calculateSolutions( grid1, cell1, displayOneSolution );
 	// when completed
 	postMessage(["END",solutionsList]);
 }
 
 onmessage = function(e) {
 	// initialize grid
-	grid = new gridBean();
-	grid.readString(e.data);
+	grid1 = new gridBean();
+	grid1.readString(e.data);
 	// initialize solutionsList
-	solutionsList = new solutions();
+	solutionsList1 = new solutions();
 	// initialize first cell
-	cell = grid.getCell("A_1");
+	cell1 = grid1.getCell("A_1");
 	// search Solutions
 	searchSolutions();
 }

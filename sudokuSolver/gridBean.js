@@ -63,7 +63,7 @@ gridBean.prototype.resethypothesis = function() {
 		let col=cols[x];
 		for (let y = 1; y<=9; y++) {
 			let id=col+'_'+y;
-			cell = this.cells[id];
+			let cell = this.cells[id];
 			cell.validHypothesis=["",1,2,3,4,5,6,7,8,9];
 		}
 	}
@@ -163,8 +163,9 @@ gridBean.prototype.resetValue=function(_cellBean) {
 	//reset hypothesis
 	this.resethypothesis();
 	// recalculate hypothesis
+	let cellId ;
 	for (cellId in this.cells) {
-		cell = this.cells[cellId];
+		let cell = this.cells[cellId];
 		let value = cell.value;
 		if (value !== "") {
 			this.setHypothesis(cell,value);
