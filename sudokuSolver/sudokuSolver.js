@@ -80,10 +80,19 @@ function display(_grid) {
 			hypoTag.setAttribute("class","hypo show");
 			let validHypo = cell.validHypothesis;
 			for (let i in validHypo) {
+				// index i = 0 is not a valid index
 				if (i !== "0") {
-					hypoId=cellId+"_"+i;
+					// get hypothesis value
+					let hypoVal=validHypo[i];
+					let hypoId = cellId+"_"+i;
 					oneHypoTag = document.getElementById(hypoId);
-					oneHypoTag.innerHTML=validHypo[i];
+					oneHypoTag.innerHTML=hypoVal;
+					// set event for valid hypothesis only
+					if (hypoVal != "") {
+						oneHypoTag.addEventListener("click", function(){ setHypothesis(this); });
+					} else {
+						oneHypoTag.removeEventListener("click", function(){ setHypothesis(this); });
+					}
 				}
 			}
 		}

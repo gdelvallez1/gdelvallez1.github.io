@@ -211,7 +211,7 @@ gridBean.prototype.checkErrors=function() {
 };
 
 // add error to error list
-gridBean.prototype.addError=function(_location,_message,_hypo = 0) {
+gridBean.prototype.addError=function(_location,_message,_hypo = "") {
 	// check if message already exixts
 	let foundObj = this.errorList.find(
             value => { return (value.where+value.message+value.hypo == _location+_message+_hypo) } );
@@ -229,7 +229,7 @@ gridBean.prototype.addError=function(_location,_message,_hypo = 0) {
 }
 
 // add error to error list
-gridBean.prototype.addWarning=function(_location,_message,_hypo = 0) {
+gridBean.prototype.addWarning=function(_location,_message,_hypo = "") {
 	// check if message already exixts
 	let foundObj = this.warningList.find(
             value => { return (value.where+value.message+value.hypo == _location+_message+_hypo) } );
