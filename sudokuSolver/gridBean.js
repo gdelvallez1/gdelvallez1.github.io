@@ -154,12 +154,21 @@ gridBean.prototype.setHypothesis=function(_cellBean,_hypoVal) {
 				cell.validHypothesis[_hypoVal]="";
 			}
 		}
+	} else {
+		console.log("id:"+_cellBean.id+" hypo:"+_hypoVal+" validHypo:"+_cellBean.validHypothesis[_hypoVal]);
+		// update value
+		_cellBean.value=_hypoVal;
 	}
 };
 
 gridBean.prototype.resetValue=function(_cellBean) {
 	// reset value
 	_cellBean.value="";
+	//reset all hypothesis
+	this.recalculateAllHypothesis();
+};
+
+gridBean.prototype.recalculateAllHypothesis=function() {
 	//reset hypothesis
 	this.resethypothesis();
 	// recalculate hypothesis
