@@ -87,12 +87,15 @@ function display(_grid) {
 					let hypoId = cellId+"_"+i;
 					oneHypoTag = document.getElementById(hypoId);
 					oneHypoTag.innerHTML=hypoVal;
+					// remove listener by cloning
+					let oneHypoTagClone = oneHypoTag.cloneNode(true);
+					oneHypoTag.parentNode.replaceChild(oneHypoTagClone, oneHypoTag);
 					// set event for valid hypothesis only
 					if (hypoVal != "") {
-						oneHypoTag.addEventListener("click", function(){ setHypothesis(this); });
-					} else {
-						oneHypoTag.removeEventListener("click", function(){ setHypothesis(this); });
+						oneHypoTagClone.addEventListener("click", function(){ setHypothesis(this); });
 					}
+					// replace the hypotag by clone
+					oneHypoTag.parentNode.replaceChild(oneHypoTagClone, oneHypoTag);
 				}
 			}
 		}
