@@ -108,8 +108,9 @@ function display(_grid) {
 	for (let errorIndex in errorArray ) {
 		let errorObj = errorArray[errorIndex];
 		let errorLoc = errorObj.where;
+		let errorValue = errorObj.hypo;
 		let errorMsg = errorObj.message;
-		let texte = errorLoc+" : "+errorMsg;
+		let texte = errorLoc+" "+errorValue+" : "+errorMsg;
 		let liTag = document.createElement("li");
 		liTag.innerHTML=texte;
 		liTag.setAttribute("class","error");
@@ -120,8 +121,9 @@ function display(_grid) {
 	for (let warnIndex in warnArray ) {
 		let warnObj = warnArray[warnIndex];
 		let warnLoc = warnObj.where;
+		let warnValue = warnObj.hypo;
 		let warnMsg = warnObj.message;
-		let texte = warnLoc+" : "+warnMsg;
+		let texte = warnLoc+" "+warnValue+" : "+warnMsg;
 		let liTag = document.createElement("li");
 		liTag.innerHTML=texte;
 		liTag.setAttribute("class","warning");

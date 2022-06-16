@@ -211,14 +211,15 @@ gridBean.prototype.checkErrors=function() {
 };
 
 // add error to error list
-gridBean.prototype.addError=function(_location,_message) {
+gridBean.prototype.addError=function(_location,_message,_hypo = 0) {
 	// check if message already exixts
 	let foundObj = this.errorList.find(
-            value => { return (value.where+value.message == _location+_message) } );
+            value => { return (value.where+value.message+value.hypo == _location+_message+_hypo) } );
 	if (foundObj == undefined) {
 		let errorObj ={};
 		// set error object
 		errorObj.where=_location;
+		errorObj.hypo=_hypo;
 		errorObj.message=_message;
 		// set type error
 		errorObj.type="E";
@@ -228,14 +229,15 @@ gridBean.prototype.addError=function(_location,_message) {
 }
 
 // add error to error list
-gridBean.prototype.addWarning=function(_location,_message) {
+gridBean.prototype.addWarning=function(_location,_message,_hypo = 0) {
 	// check if message already exixts
 	let foundObj = this.warningList.find(
-            value => { return (value.where+value.message == _location+_message) } );
+            value => { return (value.where+value.message+value.hypo == _location+_message+_hypo) } );
 	if (foundObj == undefined) {
 		let warnObj ={};
 		// set error object= 
 		warnObj.where=_location;
+		warnObj.hypo=_hypo;
 		warnObj.message=_message;
 		// set type error
 		warnObj.type="W";
@@ -264,8 +266,8 @@ gridBean.prototype.checkGroup=function(_group,_groupId) {
 			// there is a value set
 			if (valueSet[value]!== 0) {
 				// value seen the second time in the line
-				let msg="Same value twice:"+value;
-				this.addError(_groupId,msg);
+				let msg="Same value twice";
+				this.addError(_groupId,msg,value);
 				this.status="FAILED";
 				oneErrorFound = true;
 			} else {
@@ -277,11 +279,13 @@ gridBean.prototype.checkGroup=function(_group,_groupId) {
 			// register the possible values
 			let validHypothesis = cell.validHypothesis;
 			let nbHypo=0;
+			let lastHypo=0;
 			for (let i in validHypothesis) {
 				if (i !== "0") {
 					hypo = validHypothesis[i];
 					if (hypo !== "") {
 						nbHypo = nbHypo + 1;
+						lastHypo = i;
 						nbHypothesis[hypo]+=1;
 						cellHypothesis[hypo]=cellId;
 					}
@@ -290,14 +294,14 @@ gridBean.prototype.checkGroup=function(_group,_groupId) {
 			// if no hypo on this cell
 			if (nbHypo == 0) {
 				// no solution possible and no value assigned
-				let msg="No possible values for cell "+cellId;
+				let msg="No possible values for cell";
 				this.addError(cellId,msg);
 				this.status="FAILED";
 				oneErrorFound = true;
 			} else if (nbHypo == 1) {
 				//Only One possible value for cell and no value assigbned
-				let msg="Only one possible values for cell "+cellId;
-				this.addWarning(cellId,msg);
+				let msg="Only one possible values for cell";
+				this.addWarning(cellId,msg,lastHypo);
 			}
 		}
 	}
@@ -307,14 +311,14 @@ gridBean.prototype.checkGroup=function(_group,_groupId) {
 		if (i !== "0" && valueSet[i] == 0) {
 			hypo = nbHypothesis[i];
 			if ( hypo ==0 ) {
-				let msg="Not possible to set "+i+" somewhere";
-				this.addError(_groupId,msg);
+				let msg="No possible cell to set value";
+				this.addError(_groupId,msg,i);
 				this.status="FAILED";
 				oneErrorFound = true;
 			} else if ( hypo == 1 ) {
 				let cellHypo = cellHypothesis[i];
-				let msg="This is the only possible cell to set "+i;
-				this.addWarning(cellHypo,msg);
+				let msg="Only one possible cell to set value";
+				this.addWarning(cellHypo,msg,i);
 			}
 		}
 	}
