@@ -8,10 +8,6 @@ solutionsList = new solutions();
 
 display(grid);
 
-//calculateManualSolutions();
-
-//calculateAllSolutions();
-
 function resetGrid() {
 	grid = new gridBean();
 	grid.checkErrors();
@@ -112,6 +108,7 @@ function display(_grid) {
 		let texte = status;
 		let liTag = document.createElement("li");
 		liTag.innerHTML=texte;
+		liTag.className="status";
 		errorTag.appendChild(liTag);		
 	}
 	// display error list
