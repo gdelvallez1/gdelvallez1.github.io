@@ -18,14 +18,20 @@ function searchSolutions () {
 }
 
 onmessage = function(e) {
-	// initialize grid
-	grid1 = new gridBean();
-	grid1.readString(e.data);
-	// initialize solutionsList
-	solutionsList1 = new solutions();
-	// initialize first cell
-	cell1 = grid1.getCell("A_1");
-	// search Solutions
-	searchSolutions();
+	// get action requested
+	let action = e.data[0];
+	if (action == "START" ) {
+		// initialize grid
+		grid1 = new gridBean();
+		grid1.readString(e.data[1]);
+		// initialize solutionsList
+		solutionsList1 = new solutions();
+		// initialize first cell
+		cell1 = grid1.getCell("A_1");
+		// search Solutions
+		searchSolutions();
+	} else if (action == "STOP" ) {
+		solutionsList1.stop();
+	}
 }
 

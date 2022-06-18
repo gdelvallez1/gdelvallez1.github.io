@@ -10,11 +10,17 @@ function solutions(_solutionList) {
 	} else {
 		// assign solutionList
 		this.solutionList = _solutionList;
+		this.stop = false;
 	}
 }
 
 solutions.prototype.resetSolutions = function () {
 	this.solutionList={};
+	this.stop = false;
+}
+
+solutions.prototype.stop = function () {
+	this.stop = true;
 }
 
 solutions.prototype.getSolutions = function () {
@@ -50,6 +56,11 @@ solutions.prototype.calculateSolutions = function ( _grid, _cell , _displayOneSo
 		// it is a faulure as it allow to work with next hypothesis.
 		return "FAILED";
 	}
+	// if calculation is stopped, end now
+	if(this.stop) {
+		return "FAILED";
+	}
+
 	let status;
 	// if cell has a value, 
 	if (_cell.value !="") {
@@ -61,6 +72,10 @@ solutions.prototype.calculateSolutions = function ( _grid, _cell , _displayOneSo
 	{
 		// for each valid hypothesis
 		for (let hypoId in _cell.validHypothesis) {
+			// if calculation is stopped, end now
+			if(this.stop) {
+				return "FAILED";
+			}
 			// use valid Hypothesis only
 			if (_cell.validHypothesis[hypoId] == hypoId) {
 				// set one hypothesis

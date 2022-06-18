@@ -2,6 +2,7 @@
 
 var grid = undefined;
 var solutionsList = undefined;
+var worker = undefined;
 
 grid = new gridBean();
 solutionsList = new solutions();
@@ -164,24 +165,29 @@ function displaySolutions() {
 	solutionsList.resetSolutions();
 	// calculate solutions based on current grid
 	if (window.Worker) {
+		if (worker != undefined) {
+			// stop worker before start a new one
+			worker.terminate();
+			worker = undefined;
+		}
 		// run asynchronous if possible
-		let w = new Worker("calculateSolutionsWorker.js");
-		w.onmessage = function(event) {
+		worker = new Worker("calculateSolutionsWorker.js");
+		worker.onmessage = function(event) {
 			if ( event.data[0] == "SOL" )  {
 				// the event data is a solution
 				displayOneSolution(event.data[1]);
-			} else {
+			} else if ( event.data[0] == "END" ) {
 				// get solutions
 				let listOfSolution = event.data[1].solutionList;
 				solutionsList = new solutions(listOfSolution);
 				// end of worker
-				w.terminate();
-				w = undefined;
+				worker.terminate();
+				worker = undefined;
 				// display calculation completion
 				completeSolutionsDisplay(start);
 			} 
 		};
-		w.postMessage(grid.toString());	
+		worker.postMessage(["START",grid.toString()]);	
 	} else {
 		// if not possible, run synchronous
 		// get first cell from the grid
@@ -190,6 +196,19 @@ function displaySolutions() {
 		// this function also call displayOneSolution as soon as the solution is found
 		solutionsList.calculateSolutions( grid, cell , displayOneSolution );
 		completeSolutionsDisplay(start);
+	}
+}
+
+function stopCalculation() {
+	if (window.Worker) {
+		// if worker is defined
+		if (worker != undefined) {
+			// stop worker
+			worker.postMessage(["STOP"]);	
+		}
+	} else {
+		// stop calculation
+		solutionsList.stop();
 	}
 }
 
