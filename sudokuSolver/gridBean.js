@@ -365,6 +365,7 @@ gridBean.prototype.readString=function(_gridString) {
 	
 	let row = 1;
 	let col = 0;
+	const validRowCharacter=["_","1","2","3","4","5","6","7","8","9"];
 	// read grid description
 	let rows = _gridString.split(",");
 	// for each counter
@@ -372,9 +373,9 @@ gridBean.prototype.readString=function(_gridString) {
 		let rowString = rows[rowIndex];
 		for (let cellIndex in rowString) {
 			let cellString = rowString[cellIndex];
-			// ignore space
-			if ( cellString !== " " ) {
-				// ignore _
+			// ignore invalid characters (also ignore space)
+			if ( validRowCharacter.includes(cellString) ) {
+				// _ means no value
 				if (cellString !== "_") {
 					// get id
 					let colLetter=cols[col];
@@ -388,9 +389,18 @@ gridBean.prototype.readString=function(_gridString) {
 				col++;
 			}
 		}
+		// chech if nb of col is normal
+		if ( col != 9) {
+			let msg="Should have 9 cols per row";
+			this.addError("L"+row,msg,col);
+		}
 		// prepare for next loop
 		row++;
 		col=0;
+	}
+	// check ib nb of row is valid
+	if ( row != 10 ) {
+		this.addError("L"+(row-1),"Should have 9 rows",(row-1));
 	}
 };
 
