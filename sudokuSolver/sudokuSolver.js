@@ -191,7 +191,8 @@ function displaySolutions() {
 			} 
 		};
 		console.log("START message to be sent to worker");
-		myWorker.postMessage(["START",grid.toString()]);	
+		let msg = ["START",grid.toString()];
+		myWorker.postMessage(msg);	
 	} else {
 		// if not possible, run synchronous
 		// get first cell from the grid

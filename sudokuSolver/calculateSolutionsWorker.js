@@ -6,7 +6,8 @@ var grid1 = undefined;
 var solutionsList1 = undefined;
 
 function displayOneSolution(sol) {
-	postMessage(["SOL",sol]);
+	let msg = ["SOL",sol];
+	postMessage(msg);
 }
 
 function searchSolutions () {
@@ -15,7 +16,8 @@ function searchSolutions () {
 	solutionsList1.calculateSolutions( grid1, cell1, displayOneSolution );
 	// when completed
 	console.log("worker send message END");
-	postMessage(["END",solutionsList1]);
+	let msg = ["END",solutionsList1];
+	postMessage(msg);
 }
 
 onmessage = function(e) {
