@@ -167,6 +167,7 @@ function displaySolutions() {
 	if (window.Worker) {
 		if (worker != undefined) {
 			// stop worker before start a new one
+			console.log("stop existing worker before start new one");
 			worker.terminate();
 			worker = undefined;
 		}
@@ -207,7 +208,7 @@ function stopCalculation() {
 		// if worker is defined
 		if (worker != undefined) {
 			// stop worker
-			console.log("post message STOP to wrker");
+			console.log("post message STOP to worker");
 			worker.postMessage(["STOP"]);	
 		}
 	} else {
