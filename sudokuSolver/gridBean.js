@@ -111,7 +111,7 @@ gridBean.prototype.setHypothesis=function(_cellBean,_hypoVal) {
 	}
 	
 	// check hypothesis is valid
-	if (_cellBean.validHypothesis[_hypoVal] == _hypoVal) {	
+//	if (_cellBean.validHypothesis[_hypoVal] == _hypoVal) {	// remove validity check as this method is not called if not valid
 		// update value
 		_cellBean.value=_hypoVal;
 
@@ -154,10 +154,10 @@ gridBean.prototype.setHypothesis=function(_cellBean,_hypoVal) {
 				cell.validHypothesis[_hypoVal]="";
 			}
 		}
-	} else {
-		// update value
-		_cellBean.value=_hypoVal;
-	}
+//	} else {
+//		// update value
+//		_cellBean.value=_hypoVal;
+//	}
 };
 
 gridBean.prototype.resetValue=function(_cellBean) {
