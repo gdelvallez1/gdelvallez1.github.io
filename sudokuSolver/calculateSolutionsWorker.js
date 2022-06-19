@@ -14,6 +14,7 @@ function searchSolutions () {
 	// this function also call displayOneSolution as soon as the solution is found
 	solutionsList1.calculateSolutions( grid1, cell1, displayOneSolution );
 	// when completed
+	console.log("worker send message END");
 	postMessage(["END",solutionsList1]);
 }
 

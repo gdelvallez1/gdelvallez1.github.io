@@ -10,18 +10,18 @@ function solutions(_solutionList) {
 	} else {
 		// assign solutionList
 		this.solutionList = _solutionList;
-		this.stop = false;
+		this.stopFlag = false;
 	}
 }
 
 solutions.prototype.resetSolutions = function () {
 	this.solutionList={};
-	this.stop = false;
+	this.stopFlag = false;
 }
 
 solutions.prototype.stop = function () {
-	console.log("solutions stop registered:"+this.stop);
-	this.stop = true;
+	this.stopFlag = true;
+	console.log("solutions stop registered:"+this.stopFlag);
 }
 
 solutions.prototype.getSolutions = function () {
@@ -58,7 +58,7 @@ solutions.prototype.calculateSolutions = function ( _grid, _cell , _displayOneSo
 		return "FAILED";
 	}
 	// if calculation is stopped, end now
-	if(this.stop) {
+	if(this.stopFlag) {
 		console.log("solutions stop for cell "+_cell.id);
 		return "FAILED";
 	}
@@ -75,8 +75,8 @@ solutions.prototype.calculateSolutions = function ( _grid, _cell , _displayOneSo
 		// for each valid hypothesis
 		for (let hypoId in _cell.validHypothesis) {
 			// if calculation is stopped, end now
-			if(this.stop) {
-				console.log("solutions stop foy hypo "+_cell.id + hypoId);
+			if(this.stopFlag) {
+				console.log("solutions stop for hypo "+_cell.id + " " + hypoId);
 				return "FAILED";
 			}
 			// use valid Hypothesis only

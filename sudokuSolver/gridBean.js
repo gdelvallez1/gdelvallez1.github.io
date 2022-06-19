@@ -365,7 +365,7 @@ gridBean.prototype.readString=function(_gridString) {
 	
 	let row = 1;
 	let col = 0;
-	const validRowCharacter=["_","1","2","3","4","5","6","7","8","9"];
+	const validCharacter=["_","1","2","3","4","5","6","7","8","9",","];
 	// read grid description
 	let rows = _gridString.split(",");
 	// for each counter
@@ -374,7 +374,7 @@ gridBean.prototype.readString=function(_gridString) {
 		for (let cellIndex in rowString) {
 			let cellString = rowString[cellIndex];
 			// ignore invalid characters (also ignore space)
-			if ( validRowCharacter.includes(cellString) ) {
+			if ( validCharacter.includes(cellString) ) {
 				// _ means no value
 				if (cellString !== "_") {
 					// get id
