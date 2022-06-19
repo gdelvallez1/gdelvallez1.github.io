@@ -64,7 +64,7 @@ function display(_grid) {
 	for (let cellId in _grid.getCells()) {
 		let cell = _grid.getCell(cellId);
 		let value = cell.value;
-		let valueTag = document.getElementById(cellId);
+		let valueTag = document.getElementById("Val_"+cellId);
 		let hypoTag = document.getElementById("Hypo_"+cellId);
 		if (value !== "") {
 			// display value
