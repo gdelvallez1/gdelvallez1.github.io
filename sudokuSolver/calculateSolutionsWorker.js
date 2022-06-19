@@ -21,7 +21,7 @@ function searchSolutions () {
 onmessage = function(e) {
 	// get action requested
 	let action = e.data[0];
-	console.log("worker recieved message "+action);
+	console.log("worker recieved message "+action+" with event :"+e);
 	if (action == "START" ){
 	 console.log("start calculation from worker");
 		// initialize grid
