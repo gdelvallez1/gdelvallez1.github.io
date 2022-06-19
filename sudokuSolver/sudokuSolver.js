@@ -2,7 +2,7 @@
 
 var grid = undefined;
 var solutionsList = undefined;
-var worker = undefined;
+var myWorker = undefined;
 
 grid = new gridBean();
 solutionsList = new solutions();
@@ -165,15 +165,15 @@ function displaySolutions() {
 	solutionsList.resetSolutions();
 	// calculate solutions based on current grid
 	if (window.Worker) {
-		if (worker != undefined) {
+		if (myWorker != undefined) {
 			// stop worker before start a new one
 			console.log("stop existing worker before start new one");
-			worker.terminate();
-			worker = undefined;
+			myWorker.terminate();
+			myWorker = undefined;
 		}
 		// run asynchronous if possible
-		worker = new Worker("calculateSolutionsWorker.js");
-		worker.onmessage = function(event) {
+		myWorker = new Worker("calculateSolutionsWorker.js");
+		myWorker.onmessage = function(event) {
 			let action = event.data[0];
 			if ( action == "SOL" )  {
 				// the event data is a solution
@@ -184,14 +184,14 @@ function displaySolutions() {
 				let listOfSolution = event.data[1].solutionList;
 				solutionsList = new solutions(listOfSolution);
 				// end of worker
-				worker.terminate();
-				worker = undefined;
+				myWorker.terminate();
+				myWorker = undefined;
 				// display calculation completion
 				completeSolutionsDisplay(start);
 			} 
 		};
 		console.log("START message to be sent to worker");
-		worker.postMessage(["START",grid.toString()]);	
+		myWorker.postMessage(["START",grid.toString()]);	
 	} else {
 		// if not possible, run synchronous
 		// get first cell from the grid
@@ -207,11 +207,11 @@ function stopCalculation() {
 	console.log("stop calculation requested");
 	if (window.Worker) {
 		// if worker is defined
-		if (worker != undefined) {
+		if (myWorker != undefined) {
 			// terminate worker
 			console.log("terminate worker");
-			worker.terminate();
-			worker = undefined;
+			myWorker.terminate();
+			myWorker = undefined;
 			// display calculation cancelled
 			let liTag = document.getElementById("solutionListStatus");
 			liTag.innerHTML="Solutions calculation cancelled.";
