@@ -49,7 +49,7 @@ function setHypothesis(_cellTag) {
 
 // manage click on value
 function resetValue(_cellTag) {
-	let cellId = _cellTag.id;
+	let cellId = _cellTag.id.substr(4, 3);
 	let cellBean = grid.getCell(cellId);
 	// update the grid
 	grid.resetValue(cellBean);
