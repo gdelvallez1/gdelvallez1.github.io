@@ -173,10 +173,12 @@ function displaySolutions() {
 		// run asynchronous if possible
 		worker = new Worker("calculateSolutionsWorker.js");
 		worker.onmessage = function(event) {
-			if ( event.data[0] == "SOL" )  {
+			let action = event.data[0];
+			if ( action == "SOL" )  {
 				// the event data is a solution
 				displayOneSolution(event.data[1]);
-			} else if ( event.data[0] == "END" ) {
+			} else if ( action == "END" ) {
+				console.log("message from worker "+action);
 				// get solutions
 				let listOfSolution = event.data[1].solutionList;
 				solutionsList = new solutions(listOfSolution);
