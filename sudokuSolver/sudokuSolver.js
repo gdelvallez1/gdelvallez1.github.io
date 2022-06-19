@@ -207,9 +207,13 @@ function stopCalculation() {
 	if (window.Worker) {
 		// if worker is defined
 		if (worker != undefined) {
-			// stop worker
-			console.log("post message STOP to worker");
-			worker.postMessage(["STOP"]);	
+			// terminate worker
+			console.log("terminate worker");
+			worker.terminate();
+			worker = undefined;
+			// display calculation cancelled
+			let liTag = document.getElementById("solutionListStatus");
+			liTag.innerHTML="Solutions calculation cancelled.";
 		}
 	} else {
 		// stop calculation
