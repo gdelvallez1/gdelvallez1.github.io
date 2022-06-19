@@ -20,7 +20,9 @@ function searchSolutions () {
 onmessage = function(e) {
 	// get action requested
 	let action = e.data[0];
-	if (action == "START" ) {
+	console.log("worker recieved message "+action);
+	if (action == "START" ){
+	 console.log("start calculation from worker");
 		// initialize grid
 		grid1 = new gridBean();
 		grid1.readString(e.data[1]);
@@ -31,6 +33,7 @@ onmessage = function(e) {
 		// search Solutions
 		searchSolutions();
 	} else if (action == "STOP" ) {
+		console.log("solutions stop call from worker");
 		solutionsList1.stop();
 	}
 }

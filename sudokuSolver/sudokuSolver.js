@@ -200,14 +200,17 @@ function displaySolutions() {
 }
 
 function stopCalculation() {
+	console.log("stop calculation requested");
 	if (window.Worker) {
 		// if worker is defined
 		if (worker != undefined) {
 			// stop worker
+			console.log("post message STOP to wrker");
 			worker.postMessage(["STOP"]);	
 		}
 	} else {
 		// stop calculation
+		console.log("solutions stop call");
 		solutionsList.stop();
 	}
 }
