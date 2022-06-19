@@ -15,7 +15,6 @@ function searchSolutions () {
 	// this function also call displayOneSolution as soon as the solution is found
 	solutionsList1.calculateSolutions( grid1, cell1, displayOneSolution );
 	// when completed
-	console.log("worker send message END");
 	let msg = ["END",solutionsList1];
 	postMessage(msg);
 }
@@ -23,11 +22,7 @@ function searchSolutions () {
 onmessage = function(e) {
 	// get action requested
 	let action = e.data[0];
-	console.log("worker recieved message "+action);
-	console.log(e);
-	console.log(e.data);
 	if (action == "START" ){
-	 console.log("start calculation from worker");
 		// initialize grid
 		grid1 = new gridBean();
 		grid1.readString(e.data[1]);
@@ -38,7 +33,6 @@ onmessage = function(e) {
 		// search Solutions
 		searchSolutions();
 	} else if (action == "STOP" ) {
-		console.log("solutions stop call from worker");
 		solutionsList1.stop();
 	}
 }

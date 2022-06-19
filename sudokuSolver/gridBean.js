@@ -155,7 +155,6 @@ gridBean.prototype.setHypothesis=function(_cellBean,_hypoVal) {
 			}
 		}
 	} else {
-		console.log("id:"+_cellBean.id+" hypo:"+_hypoVal+" validHypo:"+_cellBean.validHypothesis[_hypoVal]);
 		// update value
 		_cellBean.value=_hypoVal;
 	}

@@ -21,7 +21,6 @@ solutions.prototype.resetSolutions = function () {
 
 solutions.prototype.stop = function () {
 	this.stopFlag = true;
-	console.log("solutions stop registered:"+this.stopFlag);
 }
 
 solutions.prototype.getSolutions = function () {
@@ -59,7 +58,6 @@ solutions.prototype.calculateSolutions = function ( _grid, _cell , _displayOneSo
 	}
 	// if calculation is stopped, end now
 	if(this.stopFlag) {
-		console.log("solutions stop for cell "+_cell.id);
 		return "FAILED";
 	}
 
@@ -76,7 +74,6 @@ solutions.prototype.calculateSolutions = function ( _grid, _cell , _displayOneSo
 		for (let hypoId in _cell.validHypothesis) {
 			// if calculation is stopped, end now
 			if(this.stopFlag) {
-				console.log("solutions stop for hypo "+_cell.id + " " + hypoId);
 				return "FAILED";
 			}
 			// use valid Hypothesis only

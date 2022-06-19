@@ -167,7 +167,6 @@ function displaySolutions() {
 	if (window.Worker) {
 		if (myWorker != undefined) {
 			// stop worker before start a new one
-			console.log("stop existing worker before start new one");
 			myWorker.terminate();
 			myWorker = undefined;
 		}
@@ -179,7 +178,6 @@ function displaySolutions() {
 				// the event data is a solution
 				displayOneSolution(event.data[1]);
 			} else if ( action == "END" ) {
-				console.log("message from worker "+action);
 				// get solutions
 				let listOfSolution = event.data[1].solutionList;
 				solutionsList = new solutions(listOfSolution);
@@ -190,7 +188,6 @@ function displaySolutions() {
 				completeSolutionsDisplay(start);
 			} 
 		};
-		console.log("START message to be sent to worker");
 		let msg = ["START",grid.toString()];
 		myWorker.postMessage(msg);	
 	} else {
@@ -205,12 +202,10 @@ function displaySolutions() {
 }
 
 function stopCalculation() {
-	console.log("stop calculation requested");
 	if (window.Worker) {
 		// if worker is defined
 		if (myWorker != undefined) {
 			// terminate worker
-			console.log("terminate worker");
 			myWorker.terminate();
 			myWorker = undefined;
 			// display calculation cancelled
@@ -219,7 +214,6 @@ function stopCalculation() {
 		}
 	} else {
 		// stop calculation
-		console.log("solutions stop call");
 		solutionsList.stop();
 	}
 }
