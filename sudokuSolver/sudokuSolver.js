@@ -190,6 +190,7 @@ function displaySolutions() {
 				completeSolutionsDisplay(start);
 			} 
 		};
+		console.log("START message to be sent to worker");
 		worker.postMessage(["START",grid.toString()]);	
 	} else {
 		// if not possible, run synchronous
