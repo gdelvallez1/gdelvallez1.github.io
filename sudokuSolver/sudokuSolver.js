@@ -84,6 +84,7 @@ function display(_grid) {
 					let hypoId = cellId+"_"+i;
 					oneHypoTag = document.getElementById(hypoId);
 					oneHypoTag.innerHTML=hypoVal;
+					oneHypoTag.className="hypo";
 					// remove listener by cloning
 					let oneHypoTagClone = oneHypoTag.cloneNode(true);
 					// set event for valid hypothesis only
@@ -128,6 +129,7 @@ function display(_grid) {
 	// display warning list
 	let warnArray = _grid.getWarningList();
 	for (let warnIndex in warnArray ) {
+		// add info in list of warning
 		let warnObj = warnArray[warnIndex];
 		let warnLoc = warnObj.where;
 		let warnValue = warnObj.hypo;
@@ -137,6 +139,10 @@ function display(_grid) {
 		liTag.innerHTML=texte;
 		liTag.setAttribute("class","warning");
 		errorTag.appendChild(liTag);
+		// highlight warning in grid
+		let hypoId = warnLoc+"_"+warnValue;
+		let hypoTag = document.getElementById(hypoId);
+		hypoTag.className = "hypo warning";
 	}
 }
 
