@@ -187,16 +187,16 @@ function colorBorder (_groupList, _top, _right, _bottom, _left) {
 	for ( groupIndex in _groupList) {
 		let cellId = _groupList[groupIndex];
 		// calculate style
-		if (cellId.indexOf(top) != -1) {
+		if (cellId.indexOf(_top) != -1) {
 			style += "border-top-color: red;";
 		}
-		if (cellId.indexOf(right) != -1) {
+		if (cellId.indexOf(_right) != -1) {
 			style += "border-right-color: red;";
 		}
-		if (cellId.indexOf(bottom) != -1) {
+		if (cellId.indexOf(_bottom) != -1) {
 			style += "border-bottom-color: red;";
 		}
-		if (cellId.indexOf(left) != -1) {
+		if (cellId.indexOf(_left) != -1) {
 			style += "border-left-color: red;";
 		}
 		// set border
