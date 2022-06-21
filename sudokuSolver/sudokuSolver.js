@@ -162,7 +162,7 @@ function colorGroupBorder (_groupId) {
 	let groupList = grid.getGroup(_groupId);
 	if (_groupId.indexOf("L") != -1) {
 		// group is a line
-		let line = groupId.substr(1,1);
+		let line = _groupId.substr(1,1);
 		colorBorder (groupList, line, "I", line, "A");
 	} else if (_groupId.indexOf("C") != -1) {
 		// group is a column
