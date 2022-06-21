@@ -64,6 +64,7 @@ function display(_grid) {
 	for (let cellId in _grid.getCells()) {
 		let cell = _grid.getCell(cellId);
 		let value = cell.value;
+		let cellTag = document.getElementById("Cell_"+cellId);
 		let valueTag = document.getElementById("Val_"+cellId);
 		let hypoTag = document.getElementById("Hypo_"+cellId);
 		if (value !== "") {
@@ -96,6 +97,8 @@ function display(_grid) {
 				}
 			}
 		}
+		// reset cell border
+		cellTag.style="";
 	}
 	
 	// clear errors
@@ -125,6 +128,15 @@ function display(_grid) {
 		liTag.innerHTML=texte;
 		liTag.setAttribute("class","error");
 		errorTag.appendChild(liTag);
+		// set color to border
+		if (errorLoc.indexOf("_") != -1) {
+			// location is a cell
+			let cellTag = document.getElementById("Cell_"+errorLoc);
+			cellTag.style="border-color:red";
+		} else {
+			// location is a group
+			colorGroupBorder(errorLoc);
+		}
 	}
 	// display warning list
 	let warnArray = _grid.getWarningList();
@@ -143,6 +155,53 @@ function display(_grid) {
 		let hypoId = warnLoc+"_"+warnValue;
 		let hypoTag = document.getElementById(hypoId);
 		hypoTag.className = "hypo warning";
+	}
+}
+
+function colorGroupBorder (_groupId) {
+	let groupList = grid.getGroup(_groupId);
+	if (_groupId.indexOf("L") != -1) {
+		// group is a line
+		let line = groupId.substr(1,1);
+		colorBorder (groupList, line, "I", line, "A");
+	} else if (_groupId.indexOf("C") != -1) {
+		// group is a column
+		let column = _groupId.substr(1,1);
+		colorBorder (groupList, 1, column, 9, column);
+	} else if (_groupId.indexOf("Q") != -1) {
+		// group is a quarter
+		let quartier = _groupId.substr(1,1);
+		let x = (quartier-1)%3;
+		let y = parseInt((quartier-1)/3);
+		let top = y*3+1;
+		let bottom = y*3+3;
+		let right = cols[x*3];
+		let left = cols[x*3+2];
+		colorBorder (groupList, top, right, bottom, left);
+	}
+}
+
+function colorBorder (_groupList, _top, _right, _bottom, _left) {
+	let groupIndex;
+	let style = "";
+	for ( groupIndex in _groupList) {
+		let cellId = _groupList[groupIndex];
+		// calculate style
+		if (cellId.indexOf(top) != -1) {
+			style += "border-top-color: red;";
+		}
+		if (cellId.indexOf(right) != -1) {
+			style += "border-right-color: red;";
+		}
+		if (cellId.indexOf(bottom) != -1) {
+			style += "border-bottom-color: red;";
+		}
+		if (cellId.indexOf(left) != -1) {
+			style += "border-left-color: red;";
+		}
+		// set border
+		let cellTag = document.getElementById("Cell_"+cellId);
+		cellTag.style=style;
 	}
 }
 
