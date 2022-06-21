@@ -175,8 +175,8 @@ function colorGroupBorder (_groupId) {
 		let y = parseInt((quartier-1)/3);
 		let top = y*3+1;
 		let bottom = y*3+3;
-		let right = cols[x*3];
-		let left = cols[x*3+2];
+		let right = cols[x*3+2];
+		let left = cols[x*3];
 		colorBorder (groupList, top, right, bottom, left);
 	}
 }
