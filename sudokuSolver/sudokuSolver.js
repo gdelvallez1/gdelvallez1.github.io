@@ -186,7 +186,8 @@ function colorBorder (_groupList, _top, _right, _bottom, _left) {
 	for ( groupIndex in _groupList) {
 		let cellId = _groupList[groupIndex];
 		// initialize style
-		let style = "";
+		let cellTag = document.getElementById("Cell_"+cellId);
+		let style = cellTag.style;
 		// calculate style
 		if (cellId.indexOf(_top) != -1) {
 			style += "border-top-color: red;";
@@ -201,7 +202,6 @@ function colorBorder (_groupList, _top, _right, _bottom, _left) {
 			style += "border-left-color: red;";
 		}
 		// set border
-		let cellTag = document.getElementById("Cell_"+cellId);
 		cellTag.style=style;
 	}
 }
