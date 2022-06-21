@@ -183,9 +183,10 @@ function colorGroupBorder (_groupId) {
 
 function colorBorder (_groupList, _top, _right, _bottom, _left) {
 	let groupIndex;
-	let style = "";
 	for ( groupIndex in _groupList) {
 		let cellId = _groupList[groupIndex];
+		// initialize style
+		let style = "";
 		// calculate style
 		if (cellId.indexOf(_top) != -1) {
 			style += "border-top-color: red;";
