@@ -187,22 +187,19 @@ function colorBorder (_groupList, _top, _right, _bottom, _left) {
 		let cellId = _groupList[groupIndex];
 		// initialize style
 		let cellTag = document.getElementById("Cell_"+cellId);
-		let style = cellTag.style;
 		// calculate style
 		if (cellId.indexOf(_top) != -1) {
-			style += "border-top-color: red;";
+			cellTag.style.borderTopColor="red";
 		}
 		if (cellId.indexOf(_right) != -1) {
-			style += "border-right-color: red;";
+			cellTag.style.borderRightColor="red";
 		}
 		if (cellId.indexOf(_bottom) != -1) {
-			style += "border-bottom-color: red;";
+			cellTag.style.borderBottomColor="red";
 		}
 		if (cellId.indexOf(_left) != -1) {
-			style += "border-left-color: red;";
+			cellTag.style.borderLeftColor="red";
 		}
-		// set border
-		cellTag.style=style;
 	}
 }
 
