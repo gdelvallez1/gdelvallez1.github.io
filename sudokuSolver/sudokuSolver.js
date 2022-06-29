@@ -203,9 +203,16 @@ function colorBorder (_groupList, _top, _right, _bottom, _left) {
 	}
 }
 
+function saveGrid() {
+	let savedTag = document.getElementById("savedGrid");
+	//display initial grid
+	savedTag.innerHTML=grid.toString();
+}
+
 function displaySolutions() {
 	// get start date
 	let start = new Date();
+
 	// reset solution list in page
 	resetSolutionList();
 
