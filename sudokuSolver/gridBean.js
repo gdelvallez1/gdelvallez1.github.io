@@ -33,7 +33,7 @@ gridBean.prototype.initializeGrid = function() {
 			// define ID
 			let id=col+'_'+y;
 			// define group IDs
-			let cols = getGroupsIds(col,y,x);
+			let cols = this.getGroupsIds(col,y,x);
 			let colonne=cols[0];
 			let ligne=cols[1];
 			let quartier=cols[2];
