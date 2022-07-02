@@ -1,14 +1,25 @@
 // gridBean.js
 
-const cols = ["A", "B", "C", "D", "E", "F", "G","H","I"];
+const cols = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
 
 function gridBean() {
 	this.initializeGrid();
 }
 
 // czlculate groups from cell
-gridBean.prototype.getGroupsIds= function (_col, _line, _colNumber = undefined){
-
+gridBean.prototype.getGroupsIds= function (_colLetter, _lineNumber, _colNumber = undefined){
+	// if _colNumber is not set, 
+	if (_colNumber == undefined) {
+		// define _colNumber (0 to 8) based on _colLetter
+		_colNumber = _colLetter.charCodeAt(0) - 65;
+	}
+	let ligne="L"+_lineNumber;
+	let colonne="C"+_colLetter;
+	let q= 1+parseInt(_colNumber/3) + parseInt((_lineNumber-1)/3)*3;
+	let quartier="Q"+q;
+	let cols = [];
+	cols.push(colonne,ligne,quartier);
+	return cols;
 }
 
 gridBean.prototype.initializeGrid = function() {
@@ -19,11 +30,14 @@ gridBean.prototype.initializeGrid = function() {
 	for (let x = 0; x <= 8; x++) {
 		let col=cols[x];
 		for (let y = 1; y<=9; y++) {
+			// define ID
 			let id=col+'_'+y;
-			let ligne="L"+y;
-			let colonne="C"+col;
-			let q= 1+parseInt(x/3) + parseInt((y-1)/3)*3;
-			let quartier="Q"+q;
+			// define group IDs
+			let cols = getGroupsIds(col,y,x);
+			let colonne=cols[0];
+			let ligne=cols[1];
+			let quartier=cols[2];
+			// define cell
 			let cell={};
 			cell.id = id;
 			cell.validHypothesis=[];
@@ -197,7 +211,79 @@ gridBean.prototype.checkWarnings=function() {
 	for (let ind in warnList ) {
         let warn = warnList[ind];
         let cellId = warn.where;
-		
+		let col = cellId.substr(0, 1);
+		let ligne = cellId.substr(2, 1);
+		let hypo = warn.hypo;
+		// get groups IDs
+		let cols = getGroupsIds(col,ligne);
+		let colonne=cols[0];
+		let ligne=cols[1];
+		let quartier=cols[2];
+		// add cell info to list
+		if (cellList[cellId] == undefined) {
+			// initialize Mandatory hypothesis
+			let mandHypo = ["",0,0,0,0,0,0,0,0,0];
+			cellList[cellId] =mandHypo ;
+		}
+		if (groupList[colonne] == undefined ) {
+			// initialize Mandatory hypothesis
+			let nbMandHypo = ["",0,0,0,0,0,0,0,0,0];
+			groupList[colonne] =nbMandHypo ;
+		}
+		if (groupList[ligne] == undefined ) {
+			// initialize Mandatory hypothesis
+			let nbMandHypo = ["",0,0,0,0,0,0,0,0,0];
+			groupList[ligne] =nbMandHypo ;
+		}
+		if (groupList[quartier] == undefined ) {
+			// initialize Mandatory hypothesis
+			let nbMandHypo = ["",0,0,0,0,0,0,0,0,0];
+			groupList[quartier] =nbMandHypo ;
+		}
+		// add mandatory hypothesis to list
+		cellList[cellId][hypo] = hypo;
+		groupList[colonne][hypo] += 1;
+		groupList[ligne][hypo] += 1;
+		groupList[quartier][hypo] += 1;
+	}
+	// check if there is multiple mandatory hypo in one cell
+	for (let cellId in cellList ) {
+		let mandHypo =  cellList[cellId];
+		let nbMandHypo = 0;
+		for (let hypoInd in mandHypo ) {
+			if (hypoInd != 0) {
+				// ignore index 0, as it is not a valid hypothesis
+				let hypo = mandHypo[hypoInd];
+				if (hypo != 0) {
+					// it is a mandatory hypothesis for that cell
+					nbMandHypo += 1;
+				}
+			}
+		}
+		// if there is more than 1 mandatory hypo on the cell
+		if (nbMandHypo > 1) {
+			// it is an error
+			this.addError(cellId,"More than one mandatory value on that cell");
+			errorFound = true;
+		}
+	}
+	// check if there is multiple same mandatory hypo in one group
+	for (let groupId in groupList) {
+		let nbMandHypo = groupList[groupId];
+		// loop on each hypo of teh group
+		for (let hypoInd in nbMandHypo) {
+			if (hypoInd != 0) {
+				// ignore index 0, as it is not a valid hypothesis
+				let nbHypo = nbMandHypo[hypoInd];
+				if (nbHypo > 1) {
+					// there is more than one same mandatory hypo in the group
+					this.addError(groupId,"More than one cell for mandatory value in group",hypoInd);
+					errorFound = true;
+
+				}
+			}
+		}
+
 	}
 	return errorFound;
 }
