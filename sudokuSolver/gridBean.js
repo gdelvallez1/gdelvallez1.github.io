@@ -6,7 +6,7 @@ function gridBean() {
 	this.initializeGrid();
 }
 
-// czlculate groups from cell
+// calculate groups from cell
 gridBean.prototype.getGroupsIds= function (_colLetter, _lineNumber, _colNumber = undefined){
 	// if _colNumber is not set, 
 	if (_colNumber == undefined) {
@@ -217,7 +217,7 @@ gridBean.prototype.checkWarnings=function() {
 		// get groups IDs
 		let cols = getGroupsIds(col,ligne);
 		let colonne=cols[0];
-		let ligne=cols[1];
+		let line=cols[1];
 		let quartier=cols[2];
 		// add cell info to list
 		if (cellList[cellId] == undefined) {
@@ -230,10 +230,10 @@ gridBean.prototype.checkWarnings=function() {
 			let nbMandHypo = ["",0,0,0,0,0,0,0,0,0];
 			groupList[colonne] =nbMandHypo ;
 		}
-		if (groupList[ligne] == undefined ) {
+		if (groupList[line] == undefined ) {
 			// initialize Mandatory hypothesis
 			let nbMandHypo = ["",0,0,0,0,0,0,0,0,0];
-			groupList[ligne] =nbMandHypo ;
+			groupList[line] =nbMandHypo ;
 		}
 		if (groupList[quartier] == undefined ) {
 			// initialize Mandatory hypothesis
@@ -243,7 +243,7 @@ gridBean.prototype.checkWarnings=function() {
 		// add mandatory hypothesis to list
 		cellList[cellId][hypo] = hypo;
 		groupList[colonne][hypo] += 1;
-		groupList[ligne][hypo] += 1;
+		groupList[line][hypo] += 1;
 		groupList[quartier][hypo] += 1;
 	}
 	// check if there is multiple mandatory hypo in one cell
