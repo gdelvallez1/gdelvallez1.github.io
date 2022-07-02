@@ -215,7 +215,7 @@ gridBean.prototype.checkWarnings=function() {
 		let ligne = cellId.substr(2, 1);
 		let hypo = warn.hypo;
 		// get groups IDs
-		let cols = getGroupsIds(col,ligne);
+		let cols = this.getGroupsIds(col,ligne);
 		let colonne=cols[0];
 		let line=cols[1];
 		let quartier=cols[2];
@@ -309,7 +309,7 @@ gridBean.prototype.checkErrors=function() {
 	}
 	
 	// check if warnings reveal a failure
-	if ( checkWarnings() ) {
+	if ( this.checkWarnings() ) {
 		noErrors = false;
 	}
 	
