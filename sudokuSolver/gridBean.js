@@ -6,6 +6,11 @@ function gridBean() {
 	this.initializeGrid();
 }
 
+// czlculate groups from cell
+gridBean.prototype.getGroupsIds= function (_col, _line, _colNumber = undefined){
+
+}
+
 gridBean.prototype.initializeGrid = function() {
 	this.cells={};
 	this.groups={};
@@ -181,6 +186,22 @@ gridBean.prototype.recalculateAllHypothesis=function() {
 	}
 };
 
+// chech if warning reveal errors
+gridBean.prototype.checkWarnings=function() {
+    // init
+	let cellList= {};
+	let groupList={};
+	let errorFound = false;
+	// loop on warnings
+	let warnList= this.getWarningList();
+	for (let ind in warnList ) {
+        let warn = warnList[ind];
+        let cellId = warn.where;
+		
+	}
+	return errorFound;
+}
+
 // check for errors
 // no return
 gridBean.prototype.checkErrors=function() {
@@ -199,6 +220,11 @@ gridBean.prototype.checkErrors=function() {
 		if (errorFound) {
 			noErrors = false;
 		}
+	}
+	
+	// check if warnings reveal a failure
+	if ( checkWarnings() ) {
+		noErrors = false;
 	}
 	
 	// if no errors
