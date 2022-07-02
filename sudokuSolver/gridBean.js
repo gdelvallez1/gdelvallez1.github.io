@@ -240,11 +240,15 @@ gridBean.prototype.checkWarnings=function() {
 			let nbMandHypo = ["",0,0,0,0,0,0,0,0,0];
 			groupList[quartier] =nbMandHypo ;
 		}
-		// add mandatory hypothesis to list
-		cellList[cellId][hypo] = hypo;
-		groupList[colonne][hypo] += 1;
-		groupList[line][hypo] += 1;
-		groupList[quartier][hypo] += 1;
+		// check of that cell and hypothesis has already been worked on
+		if ( cellList[cellId][hypo] == 0 ) {
+			// cell and hypo not worked on already
+			// add mandatory hypothesis to list
+			cellList[cellId][hypo] = hypo;
+			groupList[colonne][hypo] += 1;
+			groupList[line][hypo] += 1;
+			groupList[quartier][hypo] += 1;
+		}
 	}
 	// check if there is multiple mandatory hypo in one cell
 	for (let cellId in cellList ) {
