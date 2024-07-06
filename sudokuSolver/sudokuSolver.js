@@ -29,7 +29,7 @@ function resetSolutionList() {
 	parentTag.appendChild(ulTagNew);
 	// create initial LI tag
 	let liTag = document.createElement("li");
-	liTag.innerHTML = "solutions to be provided when you click on above button";
+	liTag.innerHTML = "solutions to be provided when you click on \"Calculate\" above button";
 	ulTagNew.appendChild(liTag);
 }
 
@@ -366,4 +366,18 @@ function loadAGrid(_linkTag) {
 	// display grid
 	display(grid);
 }
+
+
+function loadGrid() {
+	let inputTag = document.getElementById("loadGrid");
+	let gridDescription = inputTag.value;
+	
+	// read string and reset the grid with info
+	grid.readString(gridDescription);
+	// check for errors
+	grid.checkErrors();
+	// display grid
+	display(grid);
+}
+
 

@@ -16,17 +16,30 @@ div.header {
 	flex: 100%;
 }
 
+div.status {
+	margin: 10px;
+}
+
 div.grid {
 	float: left;
 }
 
-div.status {
+div.errorList {
+	margin: 10px;
+}
+
+div.save {
+	margin: 10px;
+}
+
+div.load {
 	margin: 10px;
 }
 
 div.solutions {
 	margin: 10px;
 }
+
 a {
 	text-decoration: none;
 	color: aquamarine;

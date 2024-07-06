@@ -1790,15 +1790,21 @@
 	</table>
 	</div>
 
-	<div>
+	<div class="errorList">
 		<ul id="errorList">
 		</ul>
 	</div>
 
-	<div class="Save">
+	<div class="save">
 		To Save the current Sudoku grid, click <button  type="button" onclick="saveGrid();">
 		Save</button> button.<br/>
 		Grid : <span id="savedGrid" onclick="loadAGrid(this);"></span>
+	</div>
+
+	<div class="load">
+		To load a Sudoku grid string enter the string  and click <button  type="button" onclick="loadGrid();">
+		Load</button> button.<br/>
+		Grid String : <input id="loadGrid" type="text" size="120"/>
 	</div>
 
 	<div class="solutions">
@@ -1806,7 +1812,7 @@
 			<button type="button" onclick="displaySolutions();">Calculate</button> button. <br/>
 		To stop calculation, click <button type="button" onclick="stopCalculation();">Stop</button> button. <br/>
 		<ul id="solutionList">
-			<li>solutions to be provided soon...</li>
+			<li>solutions to be provided when you click on "Calculate" above button</li>
 		</ul>
 	</div>
 
