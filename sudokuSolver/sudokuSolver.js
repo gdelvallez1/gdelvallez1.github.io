@@ -140,6 +140,16 @@ function display(_grid) {
 	}
 	// display warning list
 	let warnArray = _grid.getWarningList();
+	warnArray.sort(function(a, b) {
+						awhere=a.where.split('').reverse().join('');
+						bwhere=b.where.split('').reverse().join('');
+						if (awhere < bwhere)
+							return -1;
+						if (awhere > bwhere)
+							return 1;
+						// a doit être égal à b
+						return 0;
+					} );
 	for (let warnIndex in warnArray ) {
 		// add info in list of warning
 		let warnObj = warnArray[warnIndex];
