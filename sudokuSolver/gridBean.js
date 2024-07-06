@@ -424,7 +424,7 @@ gridBean.prototype.checkGroup=function(_group,_groupId) {
 				oneErrorFound = true;
 			} else if (nbHypo == 1) {
 				//Only One possible value for cell and no value assigbned
-				let msg="Only one possible values for cell";
+				let msg="Only one possible values for cell in "+_groupId;
 				this.addWarning(cellId,msg,lastHypo);
 			}
 		}
@@ -441,7 +441,7 @@ gridBean.prototype.checkGroup=function(_group,_groupId) {
 				oneErrorFound = true;
 			} else if ( hypo == 1 ) {
 				let cellHypo = cellHypothesis[i];
-				let msg="Only one possible cell to set value";
+				let msg="Only one possible cell to set value in "+_groupId;
 				this.addWarning(cellHypo,msg,i);
 			}
 		}
