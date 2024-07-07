@@ -4,13 +4,16 @@ function verif(){
   return false;
 }
 function is_RIO(sRio, sMsisdn){
-    if(sRio.length !=12) return "Le code RIO doit comporter 12 caractÃ¨res, ne pas mettre d'espaces";
-    if (sMsisdn.substr(0,1)!=0) return "Le numÃ©ro de tÃ©lÃ©phone doit commencer par 0";
-    if (sMsisdn.length !=10) return "Le numÃ©ro de tÃ©lÃ©phone devrait faire 10 caractÃ¨res";
+    if(sRio.length !=12) return "Le code RIO doit comporter 12 caractères, ne pas mettre d'espaces";
+    if (sMsisdn.substr(0,1)!=0) return "Le numéro de téléphone doit commencer par 0";
+    if (sMsisdn.length !=10) return "Le numéro de téléphone devrait faire 10 caractères";
     var sOperateur=sRio.substr(0, 2);
     var sTypeContrat=sRio.substr(2, 1);
     var sRefClient=sRio.substr(3, 6);
-    if(sTypeContrat!="P" && sTypeContrat!="E") return "Il doit y avoir une erreur dans votre code RIO (3emeCaractère)";
+	// type de Contrat ligne mobile : PE
+	// type de Contrat ligne fixe : FGMNRSTUVWXYZ
+	var stypeContratAutorise = "PEFGMNRSTUVWXYZ";
+    if(stypeContratAutorise.indexOf(sTypeContrat) < 0) return "Il doit y avoir une erreur dans votre code RIO (3emeCaractère)";
     var sOrdre="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+";
     var nRes=new Array(0, 0, 0);
     var sTmp=sOperateur+sTypeContrat+sRefClient+sMsisdn;
